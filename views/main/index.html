@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    {{template "general/header"}}
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+
+<body>
+    <div
+        class="text-gray-700 bg-gradient-to-tr from-blue-200 via-indigo-200 to-pink-200 mx-auto w-2/5 h-1/6 mt-40 rounded-xl shadow-sm shadow-slate-900 font-mono">
+        <header>
+            <h1 class="pt-6 text-center text-2xl text-gray-700 font-bold">Welcome to kanban app</h1>
+        </header>
+
+        <div class="w-full">
+            <div class="flex items-center justify-center pb-8">
+                <a href="/login">
+                    <button type="submit"
+                        class="px-6 py-2 mt-4 text-white bg-blue-600 rounded-lg hover:bg-blue-900">Login</button>
+                </a>
+                <a href="/register" class="ml-5">
+                    <button type="submit"
+                        class="px-6 py-2 mt-4 text-white bg-blue-600 rounded-lg hover:bg-blue-900">Register</button>
+                </a>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

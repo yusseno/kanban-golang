@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    {{template "general/header"}}
+    <scrip src="https://cdn.tailwindcss.com">
+        </script>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css">
+        <style>
+            a {
+                display: block;
+            }
+        </style>
+</head>
+
+<body>
+    <div
+        class="flex flex-col w-screen h-screen overflow-auto text-gray-700 bg-gradient-to-tr from-blue-200 via-indigo-200 to-pink-200">
+        <div class="flex items-center flex-shrink-0 w-full h-16 px-10 bg-white bg-opacity-75">
+            <svg class="w-8 h-8 text-indigo-600 stroke-current" xmlns="http://www.w3.org/2000/svg" fill="none"
+                viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                    d="M7 21a4 4 0 01-4-4V5a2 2 0 012-2h4a2 2 0 012 2v12a4 4 0 01-4 4zm0 0h12a2 2 0 002-2v-4a2 2 0 00-2-2h-2.343M11 7.343l1.657-1.657a2 2 0 012.828 0l2.829 2.829a2 2 0 010 2.828l-8.486 8.485M7 17h.01" />
+            </svg>
+            <div class="flex items-center justify-center w-8 h-8 ml-auto">
+                <a href="/logout">
+                    <buton class="flex items-center justify-center w-8 h-8 ml-auto cursor-pointer font-bold">
+                        Logout
+                    </buton>
+                </a>
+            </div>
+        </div>
+        <div class="px-10 mt-6 ">
+            <h1 class="text-2xl font-bold">Kanban App</h1>
+        </div>
+        <div class="flex flex-grow px-10 mt-4 space-x-6 overflow-auto">
+            {{range $cat1, $cat2 := .categories}}
+            <div class="flex flex-col flex-shrink-0 w-72">
+                <div class="flex items-center flex-shrink-0 h-10 px-2 bg-yellow-50 rounded-lg">
+                    <span class="block text-sm font-semibold">{{$cat2.Type}}</span>
+                    <button
+                        class="flex items-center justify-center w-6 h-6 ml-auto text-indigo-500 rounded hover:bg-indigo-500 hover:text-indigo-100">
+                        <a href="/task/add?category={{$cat2.ID}}">
+                            <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path>
+                            </svg>
+                        </a>
+                    </button>
+
+                    <a href="/category/delete?category_id={{$cat2.ID}}">
+                        <button class="w-6 h-6 text-red-500 rounded hover:bg-red-500 hover:text-indigo-100">
+                            <i class="fa fa-close"></i>
+                        </button>
+                    </a>
+
+                </div>
+                <div class="flex flex-col pb-2 overflow-auto">
+                    {{range $task1, $task2 := $cat2.Tasks}}
+                    <a href="/task/update?task_id={{$task2.ID}}">
+                        <div class="relative flex flex-col items-start  mt-3 bg-white rounded-lg bg-opacity-90 group hover:bg-opacity-100 "
+                            draggable="true">
+                            <form method="POST" action="/task/delete?task_id={{$task2.ID}}">
+                                <button
+                                    class="absolute top-1 right-0 flex items-center justify-center hidden w-5 h-5 mt-3 mr-2 text-gray-400 rounded hover:text-red-500 group-hover:flex">
+                                    <i class="fa-solid fa-trash-can"></i>
+                                </button>
+                            </form>
+                            <span
+                                class="flex items-center h-6 px-3 py-4 my-3 text-sm font-semibold text-pink-500 bg-pink-100 w-full">{{$task2.Title}}</span>
+                            <h4 class="text-xs font-medium px-3">{{$task2.Description}}</h4>
+                            <div class="flex items-center w-full mt-3 text-xs font-medium text-gray-400">
+                                <form method="POST"
+                                    action="/task/update/process?task_id={{$task2.ID}}&category_id={{categoryDec $cat2.ID}}">
+                                    <button
+                                        class="flex items-center justify-center hidden w-5 h-5 ml-24 mr-2 mb-3 text-gray-400 rounded hover:bg-gray-200 hover:text-gray-700 group-hover:flex">
+                                        <i class="fa-solid fa-arrow-left fa-lg"></i>
+                                    </button>
+                                </form>
+                                <form method="POST"
+                                    action="/task/update/process?task_id={{$task2.ID}}&category_id={{categoryInc $cat2.ID}}">
+                                    <button
+                                        class="flex items-center justify-center hidden w-5 h-5 ml-10 mr-2 mb-3 text-gray-400 rounded hover:bg-gray-200 hover:text-gray-700 group-hover:flex">
+                                        <i class=" fa-solid fa-arrow-right fa-lg"></i>
+                                    </button>
+                                </form>
+                            </div>
+                        </div>
+                    </a>
+                    {{end}}
+                </div>
+            </div>
+            {{end}}
+            <div
+                class="flex items-center flex-shrink-0 h-10 px-2 bg-blue-300 rounded-lg hover:text-blue-700 hover:bg-blue-100">
+                <!-- <span class="text-sm">Add Category</span> -->
+                <a href="/category/add" class="p-2 text-sm">Add Category</a>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

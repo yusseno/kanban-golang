@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  {{template "general/header"}}
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+
+<body>
+  <div class="mx-auto bg-slate-200 w-3/12 h-1/6 mt-20 rounded-xl shadow-md shadow-gray-300">
+    <header>
+      <h1
+        class="bg-gradient-to-tr from-blue-200 via-indigo-200 to-pink-200 rounded-t-lg py-3 text-center text-xl text-gray-700 font-bold font-sans">
+        Kanban App</h1>
+      <h1 class="pt-5 text-center text-lg text-gray-700 font-bold font-sans">Login</h1>
+    </header>
+
+    <div class="w-full">
+      <form class="px-6 pt-1 pb-8 mb-4" method="post" action="/login/process">
+        <div class="mb-4">
+          <label class="block text-gray-700 text-base mb-2" for="username">
+            Email
+          </label>
+          <input
+            class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline placeholder:italic"
+            id="username" type="text" placeholder="example@gmail.com" name="email">
+        </div>
+        <div class="mb-6">
+          <label class="block text-gray-700 text-base mb-2" for="password">
+            Password
+          </label>
+          <input
+            class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline placeholder:italic"
+            id="password" type="password" placeholder="******************" name="password">
+        </div>
+        <div class="flex items-center justify-between">
+          <button
+            class="bg-blue-500 hover:bg-blue-700 w-full text-white py-1 px-4  focus:outline-none focus:shadow-outline"
+            type="submit">
+            Submit
+          </button>
+        </div>
+        <div class="text-center text-sm pt-2">
+          <span class="text-gray-500">Not registered ? </span>
+          <a class="inline-block align-baseline text-blue-400 hover:text-blue-700" href="/register">
+            Create an accout
+          </a>
+        </div>
+      </form>
+    </div>
+  </div>
+  <!-- TODO: answer here -->
+</body>
+
+</html>
